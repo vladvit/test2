@@ -13,10 +13,15 @@ public class Meal {
 
     private int id;
 
-    public Meal(LocalDateTime dateTime, String description, int calories) {
+    public Meal(int id, LocalDateTime dateTime, String description, int calories) {
+        this.id = id;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
+    }
+
+    public Meal(LocalDateTime dateTime, String description, int calories) {
+        this(0, dateTime, description, calories);
     }
 
     public void setId(int mealId) {

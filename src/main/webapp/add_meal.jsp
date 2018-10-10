@@ -51,7 +51,7 @@
 </head>
 
 <body>
-<form class="greenTable" method="POST" action='crud' name="frmAddMeal">
+<form class="greenTable" method="POST" action='meals' name="frmAddMeal">
     <input type="hidden" name="mealId" value="${meal.getId()}">
     Date : <input
         type="datetime-local" name="date"

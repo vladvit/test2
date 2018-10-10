@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FormatterUtil {
-    // Simgleton
+    // Suppresses default constructor, ensuring non-instantiability.
     private FormatterUtil() {
     }
 

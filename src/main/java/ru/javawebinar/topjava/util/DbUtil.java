@@ -10,7 +10,7 @@ public class DbUtil {
         dao = new MealCrudInMemoryDaoImpl();
     }
 
-    // Simgleton
+    // Suppresses default constructor, ensuring non-instantiability.
     private DbUtil() {
     }
 

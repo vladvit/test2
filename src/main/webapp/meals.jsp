@@ -38,12 +38,12 @@
             <td><c:out value="${meal.getDescription()}"/></td>
             <td><c:out value="${meal.getCalories()}"/></td>
             <td><c:out value="${meal.isExceed()}"/></td>
-            <td><a href="crud?action=edit&mealId=<c:out value="${meal.getId()}"/>">Update</a></td>
-            <td><a href="crud?action=delete&mealId=<c:out value="${meal.getId()}"/>">Delete</a></td>
+            <td><a href="meals?action=edit&mealId=<c:out value="${meal.getId()}"/>">Update</a></td>
+            <td><a href="meals?action=delete&mealId=<c:out value="${meal.getId()}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<p><a href="crud?action=insert">Add meal</a></p>
+<p><a href="meals?action=insert">Add meal</a></p>
 </body>
 </html>

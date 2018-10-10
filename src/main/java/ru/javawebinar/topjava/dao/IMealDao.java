@@ -13,35 +13,34 @@ public interface IMealDao {
      *
      * @param meal new meal
      */
-    void addMeal(Meal meal);
+    Meal add(Meal meal);
 
     /**
      * Deletes meal from repo
      *
-     * @param mealId meal id
+     * @param id meal id
      */
-    void deleteMeal(int mealId);
+    void delete(int id);
 
     /**
      * Updates stored object
      *
-     * @param mealId meal id
      * @param meal   meal for update
      */
-    void updateMeal(int mealId, Meal meal);
+    Meal update(Meal meal);
 
     /**
      * Retrieves all stored objects
      *
      * @return
      */
-    List<Meal> getAllMeals();
+    List<Meal> getAll();
 
     /**
      * Retrieves meal by its id
      *
-     * @param mealId
+     * @param id
      * @return
      */
-    Meal getMealById(int mealId);
+    Meal getMealById(int id);
 }
