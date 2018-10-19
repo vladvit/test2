@@ -45,7 +45,6 @@ public class MealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String action = Optional.ofNullable(request.getParameter("action")).orElse("addUpdate");
-        String id = request.getParameter("id");
 
         switch (action) {
             case "Filter": {
@@ -60,10 +59,12 @@ public class MealServlet extends HttpServlet {
                 break;
             }
             default: {
+                String id = request.getParameter("id");
+                String userId = request.getParameter("userId");
                 Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
                         LocalDateTime.parse(request.getParameter("dateTime")),
                         request.getParameter("description"),
-                        Integer.parseInt(request.getParameter("calories")), SecurityUtil.authUserId());
+                        Integer.parseInt(request.getParameter("calories")), userId.isEmpty() ? null : Integer.valueOf(userId));
 
                 log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
                 mealRestController.save(meal);
@@ -88,7 +89,7 @@ public class MealServlet extends HttpServlet {
             case "create":
             case "update": {
                 final Meal meal = "create".equals(action) ?
-                        new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000, SecurityUtil.authUserId()) :
+                        new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000) :
                         mealRestController.get(getId(request));
                 request.setAttribute("meal", meal);
                 request.getRequestDispatcher("/mealForm.jsp").forward(request, response);

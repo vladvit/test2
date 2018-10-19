@@ -20,8 +20,8 @@ public class MealRestController {
 
     private final LocalDate START_DATE = LocalDate.of(1970, 1, 1);
     private final LocalDate END_DATE = LocalDate.now();
-    private final LocalTime START_TIME = LocalTime.of(0, 0);
-    private final LocalTime END_TIME = LocalTime.of(23, 59);
+    private final LocalTime START_TIME = LocalTime.MIN;
+    private final LocalTime END_TIME = LocalTime.MAX;
 
     private LocalDate startDate;
     private LocalDate endDate;
