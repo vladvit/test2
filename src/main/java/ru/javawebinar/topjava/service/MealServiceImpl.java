@@ -43,6 +43,6 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Collection<Meal> getAll(int authUserId, LocalDate startDate, LocalDate endDate) {
-        return repository.getAll(authUserId, startDate, endDate);
+        return repository.getAllBetweenDates(authUserId, startDate, endDate);
     }
 }
