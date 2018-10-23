@@ -33,20 +33,23 @@ public class JdbcMealRepositoryImpl implements MealRepository {
 
     @Override
     public Meal save(Meal meal, int userId) {
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("description", meal.getDescription())
+                .addValue("dateTime", meal.getDateTime())
+                .addValue("calories", meal.getCalories())
+                .addValue("userId", userId);
         if (meal.isNew()) {
-            MapSqlParameterSource params = new MapSqlParameterSource()
-                    .addValue("description", meal.getDescription())
-                    .addValue("dateTime", meal.getDateTime())
-                    .addValue("calories", meal.getCalories())
-                    .addValue("userId", userId);
             KeyHolder holder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update("INSERT INTO meals(description, date_time, calories, user_id) "
                     + "VALUES(:description, :dateTime, :calories, :userId)", params, holder);
-            meal.setId(holder.getKey().intValue());
-        } else if (namedParameterJdbcTemplate.update(
-                "UPDATE meals SET description=:description, date_time=:dateTime, calories=:calories " +
-                        "WHERE id=:id", getParams(meal)) == 0) {
-            return null;
+            meal.setId(holder.getKey() != null ? holder.getKey().intValue() : 0);
+        } else {
+            params.addValue("id", meal.getId());
+            if (namedParameterJdbcTemplate.update(
+                    "UPDATE meals SET description=:description, date_time=:dateTime, calories=:calories " +
+                            "WHERE id=:id AND user_id=:userId", params) == 0) {
+                return null;
+            }
         }
         return meal;
     }
